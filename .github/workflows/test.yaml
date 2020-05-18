@@ -8,11 +8,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - name: install
+        working-directory: project
+        run: npm ci
       # Does full annotations showing error results:
       # https://github.com/mattallty/jest-github-action
       # but cannot work in a subdirectory
-      - uses: crucialfelix/jest-github-action@master
+      - uses: crucialfelix/jest-github-action@working-directory
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          working-directory: "project"
+          working-directory: ./project
