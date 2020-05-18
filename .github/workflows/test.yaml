@@ -1,0 +1,18 @@
+name: Test
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      # Does full annotations showing error results:
+      # https://github.com/mattallty/jest-github-action
+      # but cannot work in a subdirectory
+      - uses: crucialfelix/jest-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          working-directory: "project"
